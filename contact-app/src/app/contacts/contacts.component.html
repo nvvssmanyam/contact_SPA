@@ -1,0 +1,75 @@
+<pre>
+  <div class="container">
+    <form #tableForm="ngForm">
+    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addContact">Add Contact</button>
+    </form>
+      <div style="margin-top: 10px">
+      <table class="table">
+        <thead  class="thead-light">
+          <th>Title</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Ext</th>
+          <th>Fax</th>
+          <th>Email</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contact of CONTACTS">
+            <td>{{contact.title}}</td>
+            <td>{{contact.name}}</td>
+            <td>{{contact.phone}}</td>
+            <td>{{contact.ext}}</td>
+            <td>{{contact.fax}}</td>
+            <td>{{contact.email}}</td>
+            <td><button type="button" class="btn btn-secondary btn-sm" (click)="deleteContact(contact.id)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-labelledby="addContactTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <form  (ngSubmit)="addContact()" #addContactForm="ngForm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addContactTitle">Add Contact Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="ContactName">Contact Name</label>
+                <input type="text" class="form-control" id="ContactName" [(ngModel)]="contact.name"  name="ContactName" placeholder="Enter Name">
+              </div>
+              <div class="form-group">
+                <label for="subject">Title</label>
+                <input type="text" class="form-control" id="title"  [(ngModel)]="contact.title"  name="title" placeholder="Enter Title">
+              </div>
+            <div class="form-group">
+              <label for="address">Phone Number</label>
+              <input type="text" class="form-control" id="phone"  [(ngModel)]="contact.phone"  name="phone" placeholder="Enter Phone">
+            </div>
+            <div class="form-group">
+              <label for="mobile">Ext No.</label>
+              <input type="text" class="form-control" id="ext" [(ngModel)]="contact.ext" name="ext" placeholder="Enter Ext Number">
+            </div>
+            <div class="form-group">
+              <label for="mobile">Fax No.</label>
+              <input type="text" class="form-control" id="fax" [(ngModel)]="contact.fax" name="fax" placeholder="Enter Fax Number">
+            </div>
+            <div class="form-group">
+              <label for="mobile">Email Id</label>
+              <input type="text" class="form-control" id="email" [(ngModel)]="contact.email" name="email" placeholder="Enter Email id">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</pre>
