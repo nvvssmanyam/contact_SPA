@@ -1,75 +1,60 @@
-<pre>
-  <div class="container">
-    <form #tableForm="ngForm">
-    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addContact">Add Contact</button>
-    </form>
-      <div style="margin-top: 10px">
-      <table class="table">
-        <thead  class="thead-light">
-          <th>Title</th>
-          <th>Name</th>
-          <th>Phone</th>
-          <th>Ext</th>
-          <th>Fax</th>
-          <th>Email</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let contact of CONTACTS">
-            <td>{{contact.title}}</td>
-            <td>{{contact.name}}</td>
-            <td>{{contact.phone}}</td>
-            <td>{{contact.ext}}</td>
-            <td>{{contact.fax}}</td>
-            <td>{{contact.email}}</td>
-            <td><button type="button" class="btn btn-secondary btn-sm" (click)="deleteContact(contact.id)">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="addContact" tabindex="-1" role="dialog" aria-labelledby="addContactTitle" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <form  (ngSubmit)="addContact()" #addContactForm="ngForm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="addContactTitle">Add Contact Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <div class="form-group">
-                <label for="ContactName">Contact Name</label>
-                <input type="text" class="form-control" id="ContactName" [(ngModel)]="contact.name"  name="ContactName" placeholder="Enter Name">
-              </div>
-              <div class="form-group">
-                <label for="subject">Title</label>
-                <input type="text" class="form-control" id="title"  [(ngModel)]="contact.title"  name="title" placeholder="Enter Title">
-              </div>
-            <div class="form-group">
-              <label for="address">Phone Number</label>
-              <input type="text" class="form-control" id="phone"  [(ngModel)]="contact.phone"  name="phone" placeholder="Enter Phone">
-            </div>
-            <div class="form-group">
-              <label for="mobile">Ext No.</label>
-              <input type="text" class="form-control" id="ext" [(ngModel)]="contact.ext" name="ext" placeholder="Enter Ext Number">
-            </div>
-            <div class="form-group">
-              <label for="mobile">Fax No.</label>
-              <input type="text" class="form-control" id="fax" [(ngModel)]="contact.fax" name="fax" placeholder="Enter Fax Number">
-            </div>
-            <div class="form-group">
-              <label for="mobile">Email Id</label>
-              <input type="text" class="form-control" id="email" [(ngModel)]="contact.email" name="email" placeholder="Enter Email id">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-        </form>
+<p-dataTable [value]="CONTACTS" [(selection)]="selectedContact" [responsive]="true">
+  <p-header>Contact Management</p-header>
+  <p-column field="title" header="Title"></p-column>
+  <p-column field="name"  header="Name"></p-column>
+  <p-column field="phone" header="phone"></p-column>
+  <p-column field="ext" header="Ext"></p-column>
+  <p-column field="fax" header="Fax"></p-column>
+  <p-column field="email" header="Email"></p-column>
+  <p-column header="Edit">
+    <ng-template let-bike="rowData" pTemplate="body">
+        <button type="button" pButton (click)="showContactModal(bike)" icon="fa-edit"></button>
+    </ng-template>
+  </p-column>
+  <p-footer>
+      <div class="ui-helper-clearfix" style="width:100%">
+        <button type="button" icon="fa-plus" pButton style="float:left" (click)="addContactModal()" label="Add"></button>
+        <button type="button" icon="fa-close" pButton style="float:left" (click)="deleteContactModal()" label="Delete"></button>
+      </div>
+  </p-footer>
+  <p-footer></p-footer>
+  
+</p-dataTable>
+
+  <p-dialog header="Contact Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="contact">
+      <div class="ui-grid-row">
+        <!-- <div [(visible)]="hideElement"> -->
+          <input type="hidden" id="id" [(ngModel)]="contact.id"/>
+        <!-- </div> -->
+        <div class="ui-grid-col-4"><label for="title">Title</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="contact.title" /></div><br>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4"><label for="Name">name</label></div>
+        <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="contact.name" /></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4"><label for="phone">Phone</label></div>
+        <div class="ui-grid-col-8"><input pInputText id="phone" [(ngModel)]="contact.phone" /></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4"><label for="ext">Ext</label></div>
+        <div class="ui-grid-col-8"><input pInputText id="ext" [(ngModel)]="contact.ext" /></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4"><label for="fax">Fax</label></div>
+        <div class="ui-grid-col-8"><input pInputText id="fax" [(ngModel)]="contact.fax" /></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4"><label for="Email">Email</label></div>
+        <div class="ui-grid-col-8"><input pInputText id="Email" [(ngModel)]="contact.email" /></div>
       </div>
     </div>
-  </div>
-</pre>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+  
+            <button type="button" pButton icon="fa-check" (click)="addContact()" label="Save"></button>
+        </div>
+    </p-footer>
+  </p-dialog>
