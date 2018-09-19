@@ -13,20 +13,21 @@ export class ContactsComponent implements OnInit {
   contact = new Contact(0,'','','','','','');
   displayDialog: boolean;
   hideElement: boolean;
-  id = 1;
+  id = 0;
 
   constructor() { };
   selectedContact:Contact;
 
   ngOnInit() {
     this.hideElement=true;
-    this.CONTACTS = [new Contact(this.id, 'Reyaz', 'Mr', '9912399123', '54321', '54321', 'reyaz@abc.com')];
+    this.CONTACTS = [new Contact(0, 'Reyaz', 'Mr', '9912399123', '54321', '54321', 'reyaz@abc.com')];
   }
 
 
   addContact() {
+    debugger;
     let contacts = [...this.CONTACTS];
-    if(this.id == 1) {
+    if(this.id == 0) {
       this.id += 1;
       const contactEntry = new Contact(this.id, this.contact.name, this.contact.title, this.contact.phone, this.contact.ext, this.contact.fax, this.contact.email);
       contacts.push(contactEntry); 
@@ -34,6 +35,11 @@ export class ContactsComponent implements OnInit {
       for(let i=this.CONTACTS.length-1; i>0; i--) {
         if(this.CONTACTS[i].id === this.id) {
           this.CONTACTS[i].name=this.contact.name;
+          this.CONTACTS[i].title=this.contact.title;
+          this.CONTACTS[i].phone=this.contact.phone;
+          this.CONTACTS[i].ext=this.contact.ext;
+          this.CONTACTS[i].fax=this.contact.fax;
+          this.CONTACTS[i].email=this.contact.email;
         }
       }
     }
