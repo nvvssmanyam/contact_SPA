@@ -1,38 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 import {Contact} from './Contact';
-
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
+
 export class ContactsComponent implements OnInit {
 
   CONTACTS: Contact[];
   contact = new Contact(0,'','','','','','');
   displayDialog: boolean;
   hideElement: boolean;
+  response;
   id = 0;
 
-  constructor() { };
+  constructor(private http: Http) { };
   selectedContact:Contact;
 
   ngOnInit() {
     this.hideElement=true;
-    this.CONTACTS = [new Contact(1, 'Reyaz', 'Mr', '9912399123', '54321', '54321', 'reyaz@abc.com'),
-    new Contact(2, 'Jithu', 'Mr', '9912312345', '12345', '12345', 'jithu@abc.com'),
-    new Contact(3, 'Sahu', 'Mr', '9912399123', '56415', '56415', 'sahu@abc.com'),
-    new Contact(4, 'Raju', 'Mr', '9912334343', '54321', '54321', 'raju@abc.com')];
-    //Added 4 records
-    this.id=4;
+    this.getData().subscribe((data) => {
+      this.CONTACTS = data;
+    });
+    this.id=5;
   }
 
 
   addContact() {
-    debugger;
     let cont = [...this.CONTACTS];
-    console.log(this.contact.id);
     if(this.contact.id == 0) {
       this.id += 1;
       this.contact.id = this.id;
@@ -60,6 +60,11 @@ export class ContactsComponent implements OnInit {
   editContactModal(contact: Contact) {
     this.displayDialog = true;
     this.contact = this.selectedContact;
+  }
+
+  getData() {
+    return this.http.get("./assets/data/data.json")
+        .map((res:Response) => res.json());
   }
 
 }
