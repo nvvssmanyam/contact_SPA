@@ -24,10 +24,13 @@ export class ContactsComponent implements OnInit {
     new Contact(2, 'Jithu', 'Mr', '9912312345', '12345', '12345', 'jithu@abc.com'),
     new Contact(3, 'Sahu', 'Mr', '9912399123', '56415', '56415', 'sahu@abc.com'),
     new Contact(4, 'Raju', 'Mr', '9912334343', '54321', '54321', 'raju@abc.com')];
+    //Added 4 records
+    this.id=4;
   }
 
 
   addContact() {
+    debugger;
     let cont = [...this.CONTACTS];
     console.log(this.contact.id);
     if(this.contact.id == 0) {
