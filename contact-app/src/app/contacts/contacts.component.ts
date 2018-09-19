@@ -20,7 +20,10 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit() {
     this.hideElement=true;
-    this.CONTACTS = [new Contact(1, 'Reyaz', 'Mr', '9912399123', '54321', '54321', 'reyaz@abc.com')];
+    this.CONTACTS = [new Contact(1, 'Reyaz', 'Mr', '9912399123', '54321', '54321', 'reyaz@abc.com'),
+    new Contact(2, 'Jithu', 'Mr', '9912312345', '12345', '12345', 'jithu@abc.com'),
+    new Contact(3, 'Sahu', 'Mr', '9912399123', '56415', '56415', 'sahu@abc.com'),
+    new Contact(4, 'Raju', 'Mr', '9912334343', '54321', '54321', 'raju@abc.com')];
   }
 
 
