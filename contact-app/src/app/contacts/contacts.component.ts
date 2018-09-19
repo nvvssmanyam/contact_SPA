@@ -29,8 +29,9 @@ export class ContactsComponent implements OnInit {
     let contacts = [...this.CONTACTS];
     if(this.id == 0) {
       this.id += 1;
-      const contactEntry = new Contact(this.id, this.contact.name, this.contact.title, this.contact.phone, this.contact.ext, this.contact.fax, this.contact.email);
-      contacts.push(contactEntry); 
+      this.contact.id = this.id;
+      //const contactEntry = new Contact(this.id, this.contact.name, this.contact.title, this.contact.phone, this.contact.ext, this.contact.fax, this.contact.email);
+      contacts.push(this.contact); 
     } else {
       for(let i=this.CONTACTS.length-1; i>0; i--) {
         if(this.CONTACTS[i].id === this.id) {
@@ -43,8 +44,8 @@ export class ContactsComponent implements OnInit {
         }
       }
     }
-    this.displayDialog = false;
     this.CONTACTS = contacts;
+    this.resetContact();
   }
   
   deleteContact(contact: Contact) {
@@ -79,6 +80,7 @@ export class ContactsComponent implements OnInit {
 
   resetContact() {
     this.displayDialog = false;
+    this.contact.id = 0;
     this.contact.name = '';
     this.contact.title = '';
     this.contact.phone = '';

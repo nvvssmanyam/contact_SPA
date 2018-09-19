@@ -24,9 +24,7 @@
   <p-dialog header="Contact Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="contact">
       <div class="ui-grid-row">
-        <!-- <div [(visible)]="hideElement"> -->
           <input type="hidden" id="id" [(ngModel)]="contact.id"/>
-        <!-- </div> -->
         <div class="ui-grid-col-4"><label for="title">Title</label></div>
             <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="contact.title" /></div><br>
       </div>
