@@ -1,4 +1,4 @@
-<p-dataTable [value]="CONTACTS" [(selection)]="selectedContact" [responsive]="true">
+<p-dataTable [value]="CONTACTS" [(selection)]="selectedContact" selectionMode="single" [responsive]="true">
   <p-header>Contact Management</p-header>
   <p-column field="title" header="Title"></p-column>
   <p-column field="name"  header="Name"></p-column>
@@ -6,15 +6,11 @@
   <p-column field="ext" header="Ext"></p-column>
   <p-column field="fax" header="Fax"></p-column>
   <p-column field="email" header="Email"></p-column>
-  <p-column header="Edit">
-    <ng-template let-bike="rowData" pTemplate="body">
-        <button type="button" pButton (click)="showContactModal(bike)" icon="fa-edit"></button>
-    </ng-template>
-  </p-column>
   <p-footer>
       <div class="ui-helper-clearfix" style="width:100%">
-        <button type="button" icon="fa-plus" pButton style="float:left" (click)="addContactModal()" label="Add"></button>
-        <button type="button" icon="fa-close" pButton style="float:left" (click)="deleteContactModal()" label="Delete"></button>
+        <button type="button" pButton  (click)="addContactModal()" label="Add"></button>
+        <button type="button" pButton  (click)="editContactModal()" label="Edit"></button>
+        <button type="button" pButton (click)="deleteContactModal()" label="Delete"></button>
       </div>
   </p-footer>
   <p-footer></p-footer>
@@ -52,7 +48,7 @@
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
   
-            <button type="button" pButton icon="fa-check" (click)="addContact()" label="Save"></button>
+            <button type="button" pButton (click)="addContact()" label="Save"></button>
         </div>
     </p-footer>
   </p-dialog>
