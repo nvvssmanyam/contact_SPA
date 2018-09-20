@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
 import {Contact} from './Contact';
 
 @Component({
@@ -63,8 +63,7 @@ export class ContactsComponent implements OnInit {
   }
 
   getData() {
-    return this.http.get("./assets/data/data.json")
-        .map((res:Response) => res.json());
+    return this.http.get("./assets/data/data.json").pipe(map((res:Response) => res.json()));
   }
 
 }
