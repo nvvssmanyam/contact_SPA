@@ -1,3 +1,4 @@
+<div class="primetable">
 <p-dataTable [value]="CONTACTS" [(selection)]="selectedContact" selectionMode="single" [responsive]="true">
   <p-header>Contact Management</p-header>
   <p-column field="title" header="Title"></p-column>
@@ -8,9 +9,9 @@
   <p-column field="email" header="Email"></p-column>
   <p-footer>
       <div class="ui-helper-clearfix" style="width:100%;">
-        <button type="button" pButton class="floated" (click)="addContactModal()" label="Add"></button>
-        <button type="button" pButton class="floated" (click)="editContactModal()" label="Edit"></button>
-        <button type="button" pButton class="floated" (click)="deleteContactModal()" label="Delete"></button>
+        <button type="button" pButton (click)="addContactModal()" label="Add"></button>&nbsp;
+        <button type="button" pButton (click)="editContactModal()" label="Edit"></button>&nbsp;
+        <button type="button" pButton (click)="deleteContactModal()" label="Delete"></button>
       </div>
   </p-footer>
   <p-footer></p-footer>
@@ -20,29 +21,29 @@
   <p-dialog header="Contact Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="contact">
       <div class="ui-grid-row">
-          <input type="hidden" id="id" [(ngModel)]="contact.id"/>
+          <input type="hidden" id="id" [(ngModel)]="contact.id" />
         <div class="ui-grid-col-4"><label for="title">Title</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="contact.title" /></div><br>
+            <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="contact.title" required/></div><br>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="Name">name</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="contact.name" /></div>
+        <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="contact.name" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="phone">Phone</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="phone" [(ngModel)]="contact.phone" /></div>
+        <div class="ui-grid-col-8"><input pInputText id="phone" [(ngModel)]="contact.phone" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="ext">Ext</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="ext" [(ngModel)]="contact.ext" /></div>
+        <div class="ui-grid-col-8"><input pInputText id="ext" [(ngModel)]="contact.ext" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="fax">Fax</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="fax" [(ngModel)]="contact.fax" /></div>
+        <div class="ui-grid-col-8"><input pInputText id="fax" [(ngModel)]="contact.fax" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="Email">Email</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="Email" [(ngModel)]="contact.email" /></div>
+        <div class="ui-grid-col-8"><input pInputText id="Email" [(ngModel)]="contact.email" required/></div>
       </div>
     </div>
     <p-footer>
@@ -52,3 +53,4 @@
         </div>
     </p-footer>
   </p-dialog>
+</div>
