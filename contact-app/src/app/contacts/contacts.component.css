@@ -1,5 +1,9 @@
 .floated {
     width: 4%;
-    margin: 5px
-  }
+    margin: 5px;
+}
+
+.ui-grid-row {
+    margin: 10px;
+}
   
