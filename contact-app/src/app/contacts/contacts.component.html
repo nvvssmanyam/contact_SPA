@@ -1,56 +1,64 @@
+<div class="appHeader">
+  <img #img src="assets/inmar-logo-web-2x.png" alt="inmar" class="appLogo">
+</div>
+
 <div class="primetable">
-<p-dataTable [value]="CONTACTS" [(selection)]="selectedContact" selectionMode="single" [responsive]="true">
-  <p-header>Contact Management</p-header>
-  <p-column field="title" header="Title"></p-column>
-  <p-column field="name"  header="Name"></p-column>
-  <p-column field="phone" header="phone"></p-column>
-  <p-column field="ext" header="Ext"></p-column>
-  <p-column field="fax" header="Fax"></p-column>
-  <p-column field="email" header="Email"></p-column>
-  <p-footer>
-      <div class="ui-helper-clearfix" style="width:100%;">
-        <button type="button" pButton (click)="addContactModal()" label="Add"></button>&nbsp;
-        <button type="button" pButton (click)="editContactModal()" label="Edit"></button>&nbsp;
-        <button type="button" pButton (click)="deleteContactModal()" label="Delete"></button>
-      </div>
-  </p-footer>
-  <p-footer></p-footer>
-  
-</p-dataTable>
+  <p-dataTable [value]="CONTACTS" [(selection)]="selectedContact" selectionMode="single" [responsive]="true">
+    <p-header>Contact Management</p-header>
+    <p-column field="title" header="Title"></p-column>
+    <p-column field="name"  header="Name"></p-column>
+    <p-column field="phone" header="phone"></p-column>
+    <p-column field="ext" header="Ext"></p-column>
+    <p-column field="fax" header="Fax"></p-column>
+    <p-column field="email" header="Email"></p-column>
+    <p-footer>
+        <div class="ui-helper-clearfix" style="width:100%;">
+          <button type="button" pButton (click)="addContactModal()" label="Add"></button>&nbsp;
+          <button type="button" pButton (click)="editContactModal()" label="Edit"></button>&nbsp;
+          <button type="button" pButton (click)="deleteContactModal()" label="Delete"></button>
+        </div>
+    </p-footer>
+  </p-dataTable>
 
   <p-dialog header="Contact Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <form name="contactForm" #contactForm="ngForm" (ng-submit)="contactForm.$valid;" novalidate>
     <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="contact">
+      
       <div class="ui-grid-row">
-          <input type="hidden" id="id" [(ngModel)]="contact.id" />
+        <input type="hidden" name="id" id="id" [(ngModel)]="contact.id" />
         <div class="ui-grid-col-4"><label for="title">Title</label></div>
-            <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="contact.title" required/></div><br>
+        <div class="ui-grid-col-8"><input pInputText id="title" name="title" type="text" [(ngModel)]="contact.title" autocomplete="off" placeholder="Title" required/></div><br>
       </div>
       <div class="ui-grid-row">
-        <div class="ui-grid-col-4"><label for="Name">name</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="contact.name" required/></div>
+        <div class="ui-grid-col-4"><label for="Name">Name</label></div>
+        <div class="ui-grid-col-8"><input pInputText id="name" name="name" type="text" [(ngModel)]="contact.name" autocomplete="off" placeholder="Name" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="phone">Phone</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="phone" [(ngModel)]="contact.phone" required/></div>
+        <div class="ui-grid-col-8"><input pInputText id="phone" name="phone" type="text" [(ngModel)]="contact.phone" autocomplete="off" placeholder="Phone" pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="ext">Ext</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="ext" [(ngModel)]="contact.ext" required/></div>
+        <div class="ui-grid-col-8"><input pInputText id="ext" name="ext" type="text" [(ngModel)]="contact.ext" autocomplete="off" placeholder="Ext" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="fax">Fax</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="fax" [(ngModel)]="contact.fax" required/></div>
+        <div class="ui-grid-col-8"><input pInputText id="fax" name="fax" type="text" [(ngModel)]="contact.fax" autocomplete="off" placeholder="Fax" required/></div>
       </div>
       <div class="ui-grid-row">
         <div class="ui-grid-col-4"><label for="Email">Email</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="Email" [(ngModel)]="contact.email" required/></div>
+        <div class="ui-grid-col-8">
+          <input name="email" pInputText [(ngModel)]="contact.email" id="email" type="email" autocomplete="off" placeholder="Email" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required >
+        </div>
       </div>
+      
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-  
-            <button type="button" pButton (click)="addContact()" label="Save"></button>
+            <button type="button" pButton (click)="addContact(contactForm)" [disabled]="!contactForm.form.valid" label="Save"></button>&nbsp;
+            <button type="button" pButton (click)="displayDialog=false" label="Close"></button>
         </div>
     </p-footer>
+    </form>
   </p-dialog>
 </div>

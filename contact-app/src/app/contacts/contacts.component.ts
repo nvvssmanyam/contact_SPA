@@ -1,8 +1,8 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import {Contact} from './Contact';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contacts',
@@ -11,7 +11,7 @@ import {Contact} from './Contact';
 })
 
 export class ContactsComponent implements OnInit {
-
+  @ViewChild('contactForm') contactForm : NgForm;
   CONTACTS: Contact[];
   contact = new Contact(0,'','','','','','');
   displayDialog: boolean;
@@ -31,7 +31,7 @@ export class ContactsComponent implements OnInit {
   }
 
 
-  addContact() {
+  addContact(form: NgForm) {
     let cont = [...this.CONTACTS];
     if(this.contact.id == 0) {
       this.id += 1;
@@ -49,6 +49,8 @@ export class ContactsComponent implements OnInit {
   }
   
   addContactModal(){
+    this.contactForm.control.markAsUntouched();
+    this.contactForm.control.markAsPristine();
     this.displayDialog = true;
     this.contact= new Contact(0,'','','','','','');
   }
